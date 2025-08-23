@@ -47,6 +47,7 @@ async function sendTVToTelegram(tv) {
   } catch (err) {
     console.error("Error sending to Telegram:", err.message);
   }
+  await bot.sendMessage(CHAT_ID, "Tvs");
 }
 
 // Main flow

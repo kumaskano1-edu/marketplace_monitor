@@ -2,7 +2,7 @@ name: Run Telegram Bot
 
 on:
   schedule:
-    - cron: '* */2 * * *' # every 30 minutes
+    - cron: '* 8-22/2 * * *' # every 30 minutes
   workflow_dispatch: # allows manual trigger
 
 jobs:

@@ -36,6 +36,7 @@ async function getTVs() {
 // Send TV to Telegram
 async function sendTVToTelegram(tv) {
   const text = `*${tv.title}*\nPrice: $${tv.price}\nLocation: ${tv.locationName}\n[View Listing](${tv.listingUrl})`;
+  await bot.sendMessage(CHAT_ID, "Tvs", {parse_mode: "Markdown"});
 
   try {
     if (tv.image && tv.image.url) {
@@ -47,7 +48,6 @@ async function sendTVToTelegram(tv) {
   } catch (err) {
     console.error("Error sending to Telegram:", err.message);
   }
-  await bot.sendMessage(CHAT_ID, "Tvs");
 }
 
 // Main flow

@@ -1,16 +1,17 @@
 const fs = require("fs");
 const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
-
+const {Redis} = require("@upstash/redis")
 // Telegram setup
 const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
 const CHAT_ID = "5332581775";
-const bot = new TelegramBot(BOT_TOKEN, { polling: false });
 
+const bot = new TelegramBot(BOT_TOKEN, { polling: false });
 const redis = new Redis({
-  url: process.env.REDIS_URL,
-  token: process.env.REDIS_TOKEN,
-});
+  url: 'https://champion-pup-54707.upstash.io',
+  token: 'AdWzAAIncDE2MWEyOGQ4MzliMjA0OGIzODI0M2NmYmRlZDZmNGJlMHAxNTQ3MDc',
+})
+
 
 
 // Fetch TVs
@@ -40,11 +41,10 @@ async function sendTVToTelegram(tv) {
   }
 }
 
+// Main flow
 (async () => {
   const tvs = await getTVs();
-
-  await bot.sendMessage(CHAT_ID, "📺 New TV Listings:", { parse_mode: "Markdown" });
-
+  await bot.sendMessage(CHAT_ID, "Tvs", {parse_mode: "Markdown"});
   for (const tv of tvs) {
     // Check if we've already seen this listing
     const alreadySeen = await redis.sismember("seenListings", tv.listingId);
@@ -53,7 +53,5 @@ async function sendTVToTelegram(tv) {
       await redis.sadd("seenListings", tv.listingId); // add to Redis set
     }
   }
-
-  console.log("✅ Finished processing TV listings.");
+  console.log(`Processed ${tvs.length} new TVs.`);
 })();
-

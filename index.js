@@ -7,20 +7,11 @@ const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
 const CHAT_ID = "5332581775";
 const bot = new TelegramBot(BOT_TOKEN, { polling: false });
 
-// File to store already sent listing IDs
-const SEEN_FILE = "seen.json";
+const redis = new Redis({
+  url: process.env.REDIS_URL,
+  token: process.env.REDIS_TOKEN,
+});
 
-// Load seen listing IDs
-function loadSeen() {
-  if (!fs.existsSync(SEEN_FILE)) return [];
-  const data = fs.readFileSync(SEEN_FILE, "utf-8");
-  return JSON.parse(data);
-}
-
-// Save seen listing IDs
-function saveSeen(seen) {
-  fs.writeFileSync(SEEN_FILE, JSON.stringify(seen, null, 2));
-}
 
 // Fetch TVs
 async function getTVs() {
@@ -49,21 +40,20 @@ async function sendTVToTelegram(tv) {
   }
 }
 
-// Main flow
 (async () => {
-  const seen = loadSeen();
   const tvs = await getTVs();
-  await bot.sendMessage(CHAT_ID, "Tvs", {parse_mode: "Markdown"});
 
+  await bot.sendMessage(CHAT_ID, "📺 New TV Listings:", { parse_mode: "Markdown" });
 
-  const newTVs = tvs.filter(tv => !seen.includes(tv.listingId));
-
-  for (const tv of newTVs) {
-    await sendTVToTelegram(tv);
-    seen.push(tv.listingId);
+  for (const tv of tvs) {
+    // Check if we've already seen this listing
+    const alreadySeen = await redis.sismember("seenListings", tv.listingId);
+    if (!alreadySeen) {
+      await sendTVToTelegram(tv);
+      await redis.sadd("seenListings", tv.listingId); // add to Redis set
+    }
   }
 
-  saveSeen(seen);
-
-  console.log(`Processed ${newTVs.length} new TVs.`);
+  console.log("✅ Finished processing TV listings.");
 })();
+

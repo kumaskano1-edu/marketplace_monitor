@@ -1,0 +1,496 @@
+ {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/FXT4LPq7z2U5iIyGiw9JSkS4WRo=/250x250/f3b7/f3b750816063445db6c8d2970b9a5473.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '090dc6ea-7c82-32d0-a841-fe4bcbd535e3',
+    listingUrl: 'https://offerup.com/item/detail/090dc6ea-7c82-32d0-a841-fe4bcbd535e3',
+    locationName: 'Corona, CA',
+    price: '145',
+    title: '55 Inch Samsung tv',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/-PeYdaqjqL-f6suoQ9IF0X_n8sU=/250x250/1aec/1aecb1b7c4d649f5b43d23cfd8f1923d.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '171f6526-3809-35f7-86a2-7019a06e12f2',
+    listingUrl: 'https://offerup.com/item/detail/171f6526-3809-35f7-86a2-7019a06e12f2',
+    locationName: 'Placentia, CA',
+    price: '179',
+    title: 'Smart Tv Samsung Ultra HD 4K Semi Nuevo Y Grande ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/mVVEsFBe3uikJqlCyIOddfrvD3g=/250x250/3ddc/3ddc4f6ffb32496887ec32c8dfc3e7ff.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '67ee41e1-074e-3f2d-8a33-163e52c26faa',
+    listingUrl: 'https://offerup.com/item/detail/67ee41e1-074e-3f2d-8a33-163e52c26faa',
+    locationName: 'Pasadena, CA',
+    price: '170',
+    title: "Samsung AU800F 2021 55'in",
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/uwxifuv8J_LJuxlS2Yauw92yE2k=/250x250/b964/b964d6de80f64243a5498fb6557ab34b.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'f6588fb2-2b19-3dce-850d-9435baa82d49',
+    listingUrl: 'https://offerup.com/item/detail/f6588fb2-2b19-3dce-850d-9435baa82d49',
+    locationName: 'Los Angeles, CA',
+    price: '200',
+    title: '55 Inch Samsung Flat-screen TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/KLSwCVovKy8TAIIdwqTl-kK1Mqw=/250x250/03e4/03e4dceed2c64c2c8e2cbdd6af57297c.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'd6d040e6-b06e-3d6f-af22-adb72b90f419',
+    listingUrl: 'https://offerup.com/item/detail/d6d040e6-b06e-3d6f-af22-adb72b90f419',
+    locationName: 'Los Angeles, CA',
+    price: '120',
+    title: '55" Samsung 1080p TV With Wall Mount',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/fOlwiEgobVaV9fqYpsYQ2nS5hA0=/250x250/2e61/2e61f2c6176a44d9a17b07595575a39b.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'd009fd4b-4152-3df9-b7fb-4863c37f9e99',
+    listingUrl: 'https://offerup.com/item/detail/d009fd4b-4152-3df9-b7fb-4863c37f9e99',
+    locationName: 'Los Angeles, CA',
+    price: '100',
+    title: 'Samsung Smart TV 55 inch',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/PiWVNP39Ze-FSmq5F2ChiNsDl_c=/250x250/3aa5/3aa5121bd15642b0bc5bdaf0bbcea52f.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '0abff73b-4378-38f9-abfe-6246d25148a5',
+    listingUrl: 'https://offerup.com/item/detail/0abff73b-4378-38f9-abfe-6246d25148a5',
+    locationName: 'Rancho Cucamonga, CA',
+    price: '200',
+    title: '65” SAMSUNG QLED Q70D 4K SMART TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/fCvBZAF8VDCczE1zJwMI2qFcobM=/250x250/8d06/8d060bb424064844a542b4a5119c490e.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '9c37d549-fcc8-37b7-b938-767bf1313cca',
+    listingUrl: 'https://offerup.com/item/detail/9c37d549-fcc8-37b7-b938-767bf1313cca',
+    locationName: 'Corona, CA',
+    price: '150',
+    title: 'Samsung 65 Inch 4k Smart TV ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/64leo10ysghRrJT7hC5cLpYudXc=/250x250/e49f/e49f31a9de5e4d80858cf74cc491d0b8.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '9e33ae75-0dbc-31b7-90e8-ab4df1d87f20',
+    listingUrl: 'https://offerup.com/item/detail/9e33ae75-0dbc-31b7-90e8-ab4df1d87f20',
+    locationName: 'Rancho Cucamonga, CA',
+    price: '150',
+    title: '50” Inch  Samsung TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/R6w3zWMc_X_xelaiQDK7YuKaRI4=/250x250/9de0/9de031d910f2410a97b009642a25498e.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '2f1ca4ff-1b55-3f30-b6fa-fab9ce85e1d6',
+    listingUrl: 'https://offerup.com/item/detail/2f1ca4ff-1b55-3f30-b6fa-fab9ce85e1d6',
+    locationName: 'Los Angeles, CA',
+    price: '100',
+    title: '65 inch LG tv',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/hJ4_3Pd8D2uxPtaa0TnCfis3cUg=/250x250/a84f/a84fdfc32a2b4db9b3b0efdd8b86baa3.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '0f29e212-3759-349c-bab1-6abf500ca198',
+    listingUrl: 'https://offerup.com/item/detail/0f29e212-3759-349c-bab1-6abf500ca198',
+    locationName: 'Orange, CA',
+    price: '150',
+    title: 'LG 65” 4K UHD Smart TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/A0Ez8djEF5WpyFXNLOE-f04SQmo=/250x250/3e30/3e301133135145adab4f92b0f01faa85.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'adc4c82c-5686-3764-9595-fcf35ee7d860',
+    listingUrl: 'https://offerup.com/item/detail/adc4c82c-5686-3764-9595-fcf35ee7d860',
+    locationName: 'Rancho Cucamonga, CA',
+    price: '130',
+    title: 'LG 65” UT8000 4K HDR SMART TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/2OTe3Y9lqNqmYg6shh3c9Mn_CQQ=/250x250/8e44/8e44f647fbf34bc5bedbefcbe9a77b5a.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'df956169-6eea-399e-a2fc-ffd6ad20d678',
+    listingUrl: 'https://offerup.com/item/detail/df956169-6eea-399e-a2fc-ffd6ad20d678',
+    locationName: 'Phillips Ranch, CA',
+    price: '130',
+    title: 'LG 65” UT8000 4K SMART TV - ALL TVS COME WITH WARRANTY ‼️',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/Xp-eZnE8kZvKe6J5FMu8MDVdpeY=/250x250/2d61/2d61dadb108740c78db68917b31f24ce.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'f634c924-f5e5-3918-8381-2c7161175c8c',
+    listingUrl: 'https://offerup.com/item/detail/f634c924-f5e5-3918-8381-2c7161175c8c',
+    locationName: 'Rancho Cucamonga, CA',
+    price: '130',
+    title: 'LG 65” UT8000 4K SMART TV - ALL TVS COME WITH WARRANTY ‼️',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/ClOoE-ocMW76DXoBa14mH-9GBJE=/250x250/79f6/79f634975ce343e3bd245a5bdc849f83.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '0cfcd745-1192-3422-bec9-5b5f0f252deb',
+    listingUrl: 'https://offerup.com/item/detail/0cfcd745-1192-3422-bec9-5b5f0f252deb',
+    locationName: 'Palmdale, CA',
+    price: '200',
+    title: 'LG TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 249,
+      url: 'https://images.offerup.com/i3qVjFuxaM5pXCaQnqFt6i30w3g=/249x249/2c31/2c31be8563ce4e0784edd95f3954099c.jpg',
+      width: 249
+    },
+    isFirmPrice: null,
+    listingId: 'cea0d429-046c-3372-9e0b-dfeb57de2565',
+    listingUrl: 'https://offerup.com/item/detail/cea0d429-046c-3372-9e0b-dfeb57de2565',
+    locationName: 'Los Angeles, CA',
+    price: '150',
+    title: '65” LG UT80 4K UHD Smart Tv ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/H5I_suQpo3z8lWTTHMowFfKaul0=/250x250/ff4c/ff4cc1bdef8d4722b3cd85ea3ffecc7a.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'fd24103a-1092-3841-8310-a05ad4ec5f33',
+    listingUrl: 'https://offerup.com/item/detail/fd24103a-1092-3841-8310-a05ad4ec5f33',
+    locationName: 'Long Beach, CA',
+    price: '200',
+    title: 'LG Smart TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/moG_RTjBkK6s1sPyPLg1FdRjRr0=/250x250/c603/c603408cf1484bd9b341e4c55b30a1ef.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'f1cbe158-364d-34fe-b645-851159b3895e',
+    listingUrl: 'https://offerup.com/item/detail/f1cbe158-364d-34fe-b645-851159b3895e',
+    locationName: 'Los Angeles, CA',
+    price: '185',
+    title: '65 Inch Lg Tv',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/_tvwXn_Oh1VJqhuQE3FMOfhYK0k=/250x250/d778/d7785e5559234170924d591cb9174b20.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'e41e5bf7-2208-3cf6-97de-01d46ee94e3f',
+    listingUrl: 'https://offerup.com/item/detail/e41e5bf7-2208-3cf6-97de-01d46ee94e3f',
+    locationName: 'Ontario, CA',
+    price: '100',
+    title: '65 Inch LG TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/nq4Jwb_taSzmD2Rl5zMMnEbWDH0=/250x250/7560/756090f33d9648baadbc951f2e4835ad.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '7186b6f2-0413-38d6-ab50-b82162e1548f',
+    listingUrl: 'https://offerup.com/item/detail/7186b6f2-0413-38d6-ab50-b82162e1548f',
+    locationName: 'Phillips Ranch, CA',
+    price: '116',
+    title: 'LG 65” 4K HDR SMART TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/wBO0wdnt82sbwpoEnE2VAQvcT8Y=/250x250/beca/becae54dd7934f29936cb319deeb7817.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'fac6ee05-989e-39d8-b39d-31bda22d37e7',
+    listingUrl: 'https://offerup.com/item/detail/fac6ee05-989e-39d8-b39d-31bda22d37e7',
+    locationName: 'City Of Industry, CA',
+    price: '150',
+    title: '65” LG UT80 4K UHD Smart Tv ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/MQ_v1jqBUhNfG69FrUkOhi7yp2M=/250x250/f828/f828abcaae1345d3a9838908f3ae5f0f.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'e4df1558-512b-3aff-acd4-30044e8c317c',
+    listingUrl: 'https://offerup.com/item/detail/e4df1558-512b-3aff-acd4-30044e8c317c',
+    locationName: 'Los Angeles, CA',
+    price: '200',
+    title: 'Smart LG TV 60 Inch ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/1QpWedzqzEID-SeUt6hbzX5VFls=/250x250/cf78/cf78b72408be4f8abd7ca9c648ac4d0c.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '33411ae7-1bc5-33bd-b3c5-bc8a269b25e3',
+    listingUrl: 'https://offerup.com/item/detail/33411ae7-1bc5-33bd-b3c5-bc8a269b25e3',
+    locationName: 'Irvine, CA',
+    price: '125',
+    title: 'LG tv 55 inch TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/4k1Z1aN4h1dzRKmSpYjUGZ1sh98=/250x250/fc31/fc31862714b544f1bf820acf61458fb5.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '1f769f58-413c-3fb2-88fc-8ac3b06f41f7',
+    listingUrl: 'https://offerup.com/item/detail/1f769f58-413c-3fb2-88fc-8ac3b06f41f7',
+    locationName: 'Los Angeles, CA',
+    price: '100',
+    title: 'Samsung Smart 70”  2023 ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/nCmzmYd0OX12bcj_CgTxhXnQzn0=/250x250/13c8/13c840739fab4061bead334747263204.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'adad07e1-2ab7-3747-99bb-473c6522b79b',
+    listingUrl: 'https://offerup.com/item/detail/adad07e1-2ab7-3747-99bb-473c6522b79b',
+    locationName: 'San Gabriel, CA',
+    price: '150',
+    title: 'LG 27” QHD Ergo IPS Monitor',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 249,
+      url: 'https://images.offerup.com/uf_vYGEQXMIfA1H3oHN21-AEGDg=/249x249/e4f0/e4f0604f23304654bca458789d953d10.jpg',
+      width: 249
+    },
+    isFirmPrice: null,
+    listingId: '06627d26-e38b-3838-b136-0e52ce326882',
+    listingUrl: 'https://offerup.com/item/detail/06627d26-e38b-3838-b136-0e52ce326882',
+    locationName: 'Phillips Ranch, CA',
+    price: '185',
+    title: 'LG 75” UT8000 4K HDR SMART TV',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/1Qvzq6MfbiCEUF2BR7RDmav7kHs=/250x250/8954/89546596a1214f1ea87e97c2a9ab025e.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '1785410a-e881-3bbb-9986-c2062cdf2efb',
+    listingUrl: 'https://offerup.com/item/detail/1785410a-e881-3bbb-9986-c2062cdf2efb',
+    locationName: 'West Hollywood, CA',
+    price: '200',
+    title: '75” LG UT80 4K UHD Smart Tv ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/YtJfnw0Gpgv5IGRXMJCK6MyLd7o=/250x250/f79c/f79c16960b044672b1db23f507ac2541.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'cf159ce1-7a3b-3243-8d17-8ece9e35c28d',
+    listingUrl: 'https://offerup.com/item/detail/cf159ce1-7a3b-3243-8d17-8ece9e35c28d',
+    locationName: 'Pico Rivera, CA',
+    price: '190',
+    title: '75” LG UT80 4K UHD Smart Tv ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/uj0_fEzjTR4rTgrQ4uNp9GMVTpc=/250x250/a94f/a94fd203c28c4ab8bfd43aa3543ee6d6.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: '1a3903ca-aabf-3eb4-aa0b-ffd1b1f9afb5',
+    listingUrl: 'https://offerup.com/item/detail/1a3903ca-aabf-3eb4-aa0b-ffd1b1f9afb5',
+    locationName: 'Phillips Ranch, CA',
+    price: '185',
+    title: '75” LG 8000 SERIES 4K HDR SMART TV ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/lN_Y5Fuhckr4nqGSJ0_pnhllDFs=/250x250/1cc0/1cc04b63c8c9463fa60f150ed14fe555.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'c5bda390-e9f0-3a79-8636-1c6b3f0796d0',
+    listingUrl: 'https://offerup.com/item/detail/c5bda390-e9f0-3a79-8636-1c6b3f0796d0',
+    locationName: 'Rancho Cucamonga, CA',
+    price: '185',
+    title: 'LG 75” UT8000 4K HDR SMART TV ',
+    vehicleMiles: null
+  },
+  {
+    conditionText: null,
+    flags: [ 'LOCAL_PICKUP' ],
+    image: {
+      height: 250,
+      url: 'https://images.offerup.com/czJFRtFjFTHXUQLwahUw1C-uaos=/250x250/9361/936103030a1042538583539f2e6caecd.jpg',
+      width: 250
+    },
+    isFirmPrice: null,
+    listingId: 'b1d87939-ae4b-36ac-acdb-b7f091d163c9',
+    listingUrl: 'https://offerup.com/item/detail/b1d87939-ae4b-36ac-acdb-b7f091d163c9',
+    locationName: 'Rancho Cucamonga, CA',
+    price: '185',
+    title: 'LG 75” UT8000 4K SMART TV',
+    vehicleMiles: null
+  }

@@ -15,19 +15,33 @@ on:
   workflow_dispatch:
 
 jobs:
-  run-bot:
+  check-tvs:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Restore seen.json from cache
+        uses: actions/cache@v4
         with:
-          node-version: '18'
+          path: seen.json
+          key: seen-json-cache
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run Telegram bot
+      - name: Run script
         run: node index.js
+
+      - name: Save seen.json to cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: seen.json
+          key: seen-json-cache

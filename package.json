@@ -11,7 +11,9 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@upstash/redis": "^1.35.3",
     "axios": "^1.11.0",
+    "node-cron": "^4.2.1",
     "node-telegram-bot-api": "^0.66.0"
   }
 }

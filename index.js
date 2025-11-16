@@ -13,6 +13,18 @@ const redis = new Redis({
   token: 'AdWzAAIncDE2MWEyOGQ4MzliMjA0OGIzODI0M2NmYmRlZDZmNGJlMHAxNTQ3MDc',
 })
 
+// ------------------ COMMAND KEYBOARD ---------------------
+const mainKeyboard = {
+  reply_markup: {
+    keyboard: [
+      [{ text: "/start" }],
+      [{ text: "/reset" }],
+    ],
+    resize_keyboard: true,
+    one_time_keyboard: false,
+  },
+};
+
 // ------------------ FETCH TVs ---------------------
 async function getTVs() {
   try {
@@ -37,23 +49,25 @@ async function sendTVToTelegram(tv, chatId) {
         parse_mode: "Markdown",
       });
     } else {
-      await bot.sendMessage(chatId, text, { parse_mode: "Markdown" });
+      await bot.sendMessage(chatId, text, {
+        parse_mode: "Markdown",
+      });
     }
   } catch (err) {
     console.error("Error sending to Telegram:", err.message);
   }
 }
 
-// ------------------ HANDLE /START ---------------------
+// ------------------ /start COMMAND ---------------------
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
-  await bot.sendMessage(chatId, "Fetching TVs... 📺");
+  await bot.sendMessage(chatId, "Fetching TVs... 📺", mainKeyboard);
 
   const tvs = await getTVs();
 
   if (!tvs || tvs.length === 0) {
-    return bot.sendMessage(chatId, "No TVs found right now.");
+    return bot.sendMessage(chatId, "No TVs found right now.", mainKeyboard);
   }
 
   for (const tv of tvs) {
@@ -65,12 +79,14 @@ bot.onText(/\/start/, async (msg) => {
     }
   }
 
-  await bot.sendMessage(chatId, "Done! 🚀");
+  await bot.sendMessage(chatId, "Done! 🚀", mainKeyboard);
 });
 
-// ------------------ OPTIONAL: /reset to clear memory ---------------------
+// ------------------ /reset COMMAND ---------------------
 bot.onText(/\/reset/, async (msg) => {
   await redis.del("seenListings");
-  bot.sendMessage(msg.chat.id, "Memory cleared. I will resend all TVs next time.");
+  bot.sendMessage(msg.chat.id, "Memory cleared. I will resend all TVs next time.", mainKeyboard);
 });
 
+// --------------------------------------------------------
+console.log("BOT IS RUNNING...");

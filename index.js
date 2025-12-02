@@ -10,7 +10,7 @@ const CHAT_ID = "5332581775";
 
 const redis = new Redis({
   url: "https://liked-condor-6414.upstash.io",
-  token: "AhkOAAIgcDIZZq1IoHDstdVvJTXkmCMk9PIdmQUne0uWtaG_4OPKcw",
+  token: "ARkOAAImcDI3OGI0ZDg3N2M1OTQ0YWU5YTYyY2IxNGQ5MTgzNjI4YnAyNjQxNA",
 });
 
 // --------------------------------------------------------

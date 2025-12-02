@@ -94,26 +94,3 @@ console.log("BOT IS RUNNING...");
 
 
 // Run every hour at minute 0 from 9:00 to 18:00 Los Angeles time
-cron.schedule("0 9-18 * * *", async () => {
-  console.log("Running hourly TV fetch...");
-
-  const tvs = await getTVs();
-
-  if (!tvs || tvs.length === 0) {
-    return bot.sendMessage(CHAT_ID, "No TVs found right now.");
-  }
-
-  for (const tv of tvs) {
-    const seen = await redis.sismember("seenListings", tv.listingId);
-
-    if (!seen) {
-      await sendTVToTelegram(tv, CHAT_ID);
-      await redis.sadd("seenListings", tv.listingId);
-    }
-  }
-
-  bot.sendMessage(CHAT_ID, "Hourly check done! 🚀");
-}, {
-  scheduled: true,
-  timezone: "America/Los_Angeles"
-});

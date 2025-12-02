@@ -145,4 +145,47 @@ bot.onText(/\/reset/, async (msg) => {
 });
 
 // --------------------------------------------------------
+
+
+cron.schedule(
+  "0 8-20 * * *",
+  async () => {
+    console.log("⏰ Running hourly TV check (LA time)...");
+
+    const tvs = await getTVs();
+    if (!tvs || tvs.length === 0) {
+      console.log("No TVs found.");
+      return;
+    }
+
+    for (const tv of tvs) {
+      let seen = false;
+
+      try {
+        seen = await redis.sismember("seenListings", tv.listingId);
+      } catch (err) {
+        console.error("Redis read error:", err.message);
+      }
+
+      if (!seen) {
+        await sendTVToTelegram(tv, CHAT_ID);
+
+        try {
+          await redis.sadd("seenListings", tv.listingId);
+        } catch (err) {
+          console.error("Redis write error:", err.message);
+        }
+
+        await sleep(1200);
+      }
+    }
+
+    console.log("✅ Hourly cycle finished.");
+  },
+  {
+    scheduled: true,
+    timezone: "America/Los_Angeles",
+  }
+);
+
 console.log("BOT IS RUNNING...");

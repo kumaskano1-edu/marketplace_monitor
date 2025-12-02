@@ -3,30 +3,53 @@ const TelegramBot = require("node-telegram-bot-api");
 const { Redis } = require("@upstash/redis");
 const cron = require("node-cron");
 
-// ------------------ CONFIG ---------------------
+// --------------------------------------------------------
+// TOKENS (you provided — test tokens)
 const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
 const CHAT_ID = "5332581775";
 
+const redis = new Redis({
+  url: "https://liked-condor-6414.upstash.io",
+  token: "AhkOAAIgcDIZZq1IoHDstdVvJTXkmCMk9PIdmQUne0uWtaG_4OPKcw",
+});
+
+// --------------------------------------------------------
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
-const redis = new Redis({
-  url: 'https://liked-condor-6414.upstash.io',
-  token: 'AhkOAAIgcDIZZq1IoHDstdVvJTXkmCMk9PIdmQUne0uWtaG_4OPKcw',
-})
-
-// ------------------ COMMAND KEYBOARD ---------------------
 const mainKeyboard = {
   reply_markup: {
-    keyboard: [
-      [{ text: "/start" }],
-      [{ text: "/reset" }],
-    ],
+    keyboard: [[{ text: "/start" }], [{ text: "/reset" }]],
     resize_keyboard: true,
     one_time_keyboard: false,
   },
 };
 
-// ------------------ FETCH TVs ---------------------
+// --------------------------------------------------------
+// HELPER: sleep between messages (Telegram anti-spam)
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// --------------------------------------------------------
+// HELPER: safe sending with retry
+async function safeSend(fn) {
+  try {
+    return await fn();
+  } catch (err) {
+    console.error("Telegram send failed:", err.message);
+
+    // retry once after delay
+    await sleep(1500);
+    try {
+      return await fn();
+    } catch (err2) {
+      console.error("Retry failed:", err2.message);
+    }
+  }
+}
+
+// --------------------------------------------------------
+// FETCH TVs
 async function getTVs() {
   try {
     const res = await axios.get(
@@ -39,27 +62,33 @@ async function getTVs() {
   }
 }
 
-// ------------------ SEND TO TELEGRAM ---------------------
+// --------------------------------------------------------
+// SEND TV TO TELEGRAM
 async function sendTVToTelegram(tv, chatId) {
   const text = `*${tv.title}*\nPrice: $${tv.price}\nLocation: ${tv.locationName}\n[View Listing](${tv.listingUrl})`;
 
   try {
     if (tv.image && tv.image.url) {
-      await bot.sendPhoto(chatId, tv.image.url, {
-        caption: text,
-        parse_mode: "Markdown",
-      });
+      await safeSend(() =>
+        bot.sendPhoto(chatId, tv.image.url, {
+          caption: text,
+          parse_mode: "Markdown",
+        })
+      );
     } else {
-      await bot.sendMessage(chatId, text, {
-        parse_mode: "Markdown",
-      });
+      await safeSend(() =>
+        bot.sendMessage(chatId, text, {
+          parse_mode: "Markdown",
+        })
+      );
     }
   } catch (err) {
-    console.error("Error sending to Telegram:", err.message);
+    console.error("Send error:", err.message);
   }
 }
 
-// ------------------ /start COMMAND ---------------------
+// --------------------------------------------------------
+// /start COMMAND
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
@@ -72,25 +101,48 @@ bot.onText(/\/start/, async (msg) => {
   }
 
   for (const tv of tvs) {
-    const seen = await redis.sismember("seenListings", tv.listingId);
+    let seen = false;
+
+    // Check Redis safely
+    try {
+      seen = await redis.sismember("seenListings", tv.listingId);
+    } catch (err) {
+      console.error("Redis read error:", err.message);
+    }
 
     if (!seen) {
       await sendTVToTelegram(tv, chatId);
-      await redis.sadd("seenListings", tv.listingId);
+
+      // Save to Redis safely
+      try {
+        await redis.sadd("seenListings", tv.listingId);
+      } catch (err) {
+        console.error("Redis write error:", err.message);
+      }
+
+      // Telegram safe delay
+      await sleep(1200);
     }
   }
 
   await bot.sendMessage(chatId, "Done! 🚀", mainKeyboard);
 });
 
-// ------------------ /reset COMMAND ---------------------
+// --------------------------------------------------------
+// /reset COMMAND
 bot.onText(/\/reset/, async (msg) => {
-  await redis.del("seenListings");
-  bot.sendMessage(msg.chat.id, "Memory cleared. I will resend all TVs next time.", mainKeyboard);
+  try {
+    await redis.del("seenListings");
+  } catch (err) {
+    console.error("Redis delete error:", err.message);
+  }
+
+  bot.sendMessage(
+    msg.chat.id,
+    "Memory cleared. I will resend all TVs next time.",
+    mainKeyboard
+  );
 });
 
 // --------------------------------------------------------
 console.log("BOT IS RUNNING...");
-
-
-// Run every hour at minute 0 from 9:00 to 18:00 Los Angeles time

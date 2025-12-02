@@ -10,8 +10,8 @@ const CHAT_ID = "5332581775";
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
 const redis = new Redis({
-  url: 'https://champion-pup-54707.upstash.io',
-  token: 'AdWzAAIncDE2MWEyOGQ4MzliMjA0OGIzODI0M2NmYmRlZDZmNGJlMHAxNTQ3MDc',
+  url: 'https://liked-condor-6414.upstash.io',
+  token: 'AhkOAAIgcDIZZq1IoHDstdVvJTXkmCMk9PIdmQUne0uWtaG_4OPKcw',
 })
 
 // ------------------ COMMAND KEYBOARD ---------------------

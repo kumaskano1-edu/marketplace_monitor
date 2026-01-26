@@ -148,7 +148,7 @@ bot.onText(/\/reset/, async (msg) => {
 
 
 cron.schedule(
-  "0 8-20 * * *",
+  "*/30 8-20 * * *",
   async () => {
     console.log("⏰ Running hourly TV check (LA time)...");
 

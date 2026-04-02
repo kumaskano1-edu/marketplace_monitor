@@ -6,7 +6,7 @@ const cron = require("node-cron");
 // --------------------------------------------------------
 // TOKENS (you provided — test tokens)
 const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
-const CHAT_ID = "5332581775";
+const CHAT_IDS = ["5332581775", "8235748647"];
 
 const redis = new Redis({
   url: "https://liked-condor-6414.upstash.io",
@@ -100,30 +100,27 @@ bot.onText(/\/start/, async (msg) => {
     return bot.sendMessage(chatId, "No TVs found right now.", mainKeyboard);
   }
 
-  for (const tv of tvs) {
-    let seen = false;
+for (const tv of tvs) {
+  let seen = false;
+  try {
+    seen = await redis.sismember("seenListings", tv.listingId);
+  } catch (err) {
+    console.error("Redis read error:", err.message);
+  }
 
-    // Check Redis safely
-    try {
-      seen = await redis.sismember("seenListings", tv.listingId);
-    } catch (err) {
-      console.error("Redis read error:", err.message);
-    }
-
-    if (!seen) {
+  if (!seen) {
+    for (const chatId of CHAT_IDS) {
       await sendTVToTelegram(tv, chatId);
-
-      // Save to Redis safely
-      try {
-        await redis.sadd("seenListings", tv.listingId);
-      } catch (err) {
-        console.error("Redis write error:", err.message);
-      }
-
-      // Telegram safe delay
       await sleep(1200);
     }
+
+    try {
+      await redis.sadd("seenListings", tv.listingId);
+    } catch (err) {
+      console.error("Redis write error:", err.message);
+    }
   }
+}
 
   await bot.sendMessage(chatId, "Done! 🚀", mainKeyboard);
 });

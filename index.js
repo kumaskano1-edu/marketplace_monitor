@@ -1,4 +1,4 @@
-const axios = require("axios");
+!const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
 const { Redis } = require("@upstash/redis");
 const cron = require("node-cron");
@@ -109,17 +109,17 @@ for (const tv of tvs) {
   }
 
   if (!seen) {
-    for (const chatId of CHAT_IDS) {
-      await sendTVToTelegram(tv, chatId);
-      await sleep(1200);
-    }
-
-    try {
-      await redis.sadd("seenListings", tv.listingId);
-    } catch (err) {
-      console.error("Redis write error:", err.message);
-    }
+  for (const chatId of CHAT_IDS) {
+    await sendTVToTelegram(tv, chatId);
+    await sleep(1200);
   }
+
+  try {
+    await redis.sadd("seenListings", tv.listingId);
+  } catch (err) {
+    console.error("Redis write error:", err.message);
+  }
+}
 }
 
   await bot.sendMessage(chatId, "Done! 🚀", mainKeyboard);

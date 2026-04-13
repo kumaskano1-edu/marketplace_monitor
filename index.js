@@ -1,4 +1,4 @@
-!const axios = require("axios");
+const axios = require("axios");
 const TelegramBot = require("node-telegram-bot-api");
 const { Redis } = require("@upstash/redis");
 const cron = require("node-cron");

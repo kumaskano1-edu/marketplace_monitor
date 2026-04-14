@@ -4,9 +4,8 @@ const { Redis } = require("@upstash/redis");
 const cron = require("node-cron");
 
 // --------------------------------------------------------
-// TOKENS
 const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
-const CHAT_IDS = ["5332581775", "8235748647"];
+const CHAT_ID = "8235748647";
 
 const redis = new Redis({
   url: "https://liked-condor-6414.upstash.io",
@@ -25,13 +24,10 @@ const mainKeyboard = {
 };
 
 // --------------------------------------------------------
-// HELPER: sleep between messages (Telegram anti-spam)
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-// --------------------------------------------------------
-// HELPER: safe sending with retry
 async function safeSend(fn) {
   try {
     return await fn();
@@ -47,7 +43,6 @@ async function safeSend(fn) {
 }
 
 // --------------------------------------------------------
-// FETCH TVs
 async function getTVs() {
   try {
     const res = await axios.get(
@@ -61,21 +56,20 @@ async function getTVs() {
 }
 
 // --------------------------------------------------------
-// SEND TV TO TELEGRAM
-async function sendTVToTelegram(tv, chatId) {
+async function sendTVToTelegram(tv) {
   const text = `*${tv.title}*\nPrice: $${tv.price}\nLocation: ${tv.locationName}\n[View Listing](${tv.listingUrl})`;
 
   try {
     if (tv.image && tv.image.url) {
       await safeSend(() =>
-        bot.sendPhoto(chatId, tv.image.url, {
+        bot.sendPhoto(CHAT_ID, tv.image.url, {
           caption: text,
           parse_mode: "Markdown",
         })
       );
     } else {
       await safeSend(() =>
-        bot.sendMessage(chatId, text, {
+        bot.sendMessage(CHAT_ID, text, {
           parse_mode: "Markdown",
         })
       );
@@ -86,7 +80,6 @@ async function sendTVToTelegram(tv, chatId) {
 }
 
 // --------------------------------------------------------
-// CORE LOGIC: check and send new TVs to all chat IDs
 async function checkAndSendNewTVs() {
   const tvs = await getTVs();
   if (!tvs || tvs.length === 0) {
@@ -106,10 +99,8 @@ async function checkAndSendNewTVs() {
     }
 
     if (!seen) {
-      for (const chatId of CHAT_IDS) {
-        await sendTVToTelegram(tv, chatId);
-        await sleep(1200);
-      }
+      await sendTVToTelegram(tv);
+      await sleep(1200);
 
       try {
         await redis.sadd("seenListings", tv.listingId);
@@ -124,34 +115,26 @@ async function checkAndSendNewTVs() {
 }
 
 // --------------------------------------------------------
-// /start COMMAND
 bot.onText(/\/start/, async (msg) => {
-  const chatId = msg.chat.id;
-
-  await bot.sendMessage(chatId, "Fetching TVs... 📺", mainKeyboard);
+  await bot.sendMessage(CHAT_ID, "Fetching TVs... 📺", mainKeyboard);
 
   const sentCount = await checkAndSendNewTVs();
 
   if (sentCount === 0) {
-    await bot.sendMessage(chatId, "No new TVs found right now.", mainKeyboard);
+    await bot.sendMessage(CHAT_ID, "No new TVs found right now.", mainKeyboard);
   } else {
-    await bot.sendMessage(chatId, `Done! Sent ${sentCount} new listing(s). 🚀`, mainKeyboard);
+    await bot.sendMessage(CHAT_ID, `Done! Sent ${sentCount} new listing(s). 🚀`, mainKeyboard);
   }
 });
 
 // --------------------------------------------------------
-// /reset COMMAND
 bot.onText(/\/reset/, async (msg) => {
   try {
     await redis.del("seenListings");
-    bot.sendMessage(
-      msg.chat.id,
-      "Memory cleared. I will resend all TVs next time. ✅",
-      mainKeyboard
-    );
+    bot.sendMessage(CHAT_ID, "Memory cleared. I will resend all TVs next time. ✅", mainKeyboard);
   } catch (err) {
     console.error("Redis delete error:", err.message);
-    bot.sendMessage(msg.chat.id, "Failed to clear memory. Try again.", mainKeyboard);
+    bot.sendMessage(CHAT_ID, "Failed to clear memory. Try again.", mainKeyboard);
   }
 });
 

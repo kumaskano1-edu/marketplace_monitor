@@ -4,7 +4,7 @@ const { Redis } = require("@upstash/redis");
 const cron = require("node-cron");
 
 // --------------------------------------------------------
-// TOKENS (you provided — test tokens)
+// TOKENS
 const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
 const CHAT_IDS = ["5332581775", "8235748647"];
 
@@ -37,8 +37,6 @@ async function safeSend(fn) {
     return await fn();
   } catch (err) {
     console.error("Telegram send failed:", err.message);
-
-    // retry once after delay
     await sleep(1500);
     try {
       return await fn();
@@ -88,41 +86,57 @@ async function sendTVToTelegram(tv, chatId) {
 }
 
 // --------------------------------------------------------
+// CORE LOGIC: check and send new TVs to all chat IDs
+async function checkAndSendNewTVs() {
+  const tvs = await getTVs();
+  if (!tvs || tvs.length === 0) {
+    console.log("No TVs found.");
+    return 0;
+  }
+
+  let sentCount = 0;
+
+  for (const tv of tvs) {
+    let seen = false;
+
+    try {
+      seen = await redis.sismember("seenListings", tv.listingId);
+    } catch (err) {
+      console.error("Redis read error:", err.message);
+    }
+
+    if (!seen) {
+      for (const chatId of CHAT_IDS) {
+        await sendTVToTelegram(tv, chatId);
+        await sleep(1200);
+      }
+
+      try {
+        await redis.sadd("seenListings", tv.listingId);
+        sentCount++;
+      } catch (err) {
+        console.error("Redis write error:", err.message);
+      }
+    }
+  }
+
+  return sentCount;
+}
+
+// --------------------------------------------------------
 // /start COMMAND
 bot.onText(/\/start/, async (msg) => {
   const chatId = msg.chat.id;
 
   await bot.sendMessage(chatId, "Fetching TVs... 📺", mainKeyboard);
 
-  const tvs = await getTVs();
+  const sentCount = await checkAndSendNewTVs();
 
-  if (!tvs || tvs.length === 0) {
-    return bot.sendMessage(chatId, "No TVs found right now.", mainKeyboard);
+  if (sentCount === 0) {
+    await bot.sendMessage(chatId, "No new TVs found right now.", mainKeyboard);
+  } else {
+    await bot.sendMessage(chatId, `Done! Sent ${sentCount} new listing(s). 🚀`, mainKeyboard);
   }
-
-for (const tv of tvs) {
-  let seen = false;
-  try {
-    seen = await redis.sismember("seenListings", tv.listingId);
-  } catch (err) {
-    console.error("Redis read error:", err.message);
-  }
-
-  if (!seen) {
-  for (const chatId of CHAT_IDS) {
-    await sendTVToTelegram(tv, chatId);
-    await sleep(1200);
-  }
-
-  try {
-    await redis.sadd("seenListings", tv.listingId);
-  } catch (err) {
-    console.error("Redis write error:", err.message);
-  }
-}
-}
-
-  await bot.sendMessage(chatId, "Done! 🚀", mainKeyboard);
 });
 
 // --------------------------------------------------------
@@ -130,54 +144,25 @@ for (const tv of tvs) {
 bot.onText(/\/reset/, async (msg) => {
   try {
     await redis.del("seenListings");
+    bot.sendMessage(
+      msg.chat.id,
+      "Memory cleared. I will resend all TVs next time. ✅",
+      mainKeyboard
+    );
   } catch (err) {
     console.error("Redis delete error:", err.message);
+    bot.sendMessage(msg.chat.id, "Failed to clear memory. Try again.", mainKeyboard);
   }
-
-  bot.sendMessage(
-    msg.chat.id,
-    "Memory cleared. I will resend all TVs next time.",
-    mainKeyboard
-  );
 });
 
 // --------------------------------------------------------
-
-
+// CRON: every 30 min from 8am to 8pm LA time
 cron.schedule(
   "*/30 8-20 * * *",
   async () => {
-    console.log("⏰ Running hourly TV check (LA time)...");
-
-    const tvs = await getTVs();
-    if (!tvs || tvs.length === 0) {
-      console.log("No TVs found.");
-      return;
-    }
-
-    for (const tv of tvs) {
-      let seen = false;
-
-      try {
-        seen = await redis.sismember("seenListings", tv.listingId);
-      } catch (err) {
-        console.error("Redis read error:", err.message);
-      }
-
-      if (!seen) {
-        await sendTVToTelegram(tv, CHAT_ID);
-
-        try {
-          await redis.sadd("seenListings", tv.listingId);
-        } catch (err) {
-          console.error("Redis write error:", err.message);
-        }
-
-        await sleep(1200);
-      }
-    }
-
-    console.log("✅ Hourly cycle finished.");
+    console.log("⏰ Running 30-min TV check (LA time)...");
+    const sentCount = await checkAndSendNewTVs();
+    console.log(`✅ Cycle finished. Sent ${sentCount} new listing(s).`);
   },
   {
     scheduled: true,

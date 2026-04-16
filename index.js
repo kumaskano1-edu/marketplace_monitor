@@ -4,7 +4,7 @@ const { Redis } = require("@upstash/redis");
 const cron = require("node-cron");
 
 // --------------------------------------------------------
-// TOKENS (you provided — test tokens)
+// TOKENS
 const BOT_TOKEN = "8303035400:AAG4I6ScEoJucL06TZ_e5bLdARj5n1brHng";
 const CHAT_ID = "8235748647";
 
@@ -37,8 +37,6 @@ async function safeSend(fn) {
     return await fn();
   } catch (err) {
     console.error("Telegram send failed:", err.message);
-
-    // retry once after delay
     await sleep(1500);
     try {
       return await fn();
@@ -69,8 +67,19 @@ async function sendTVToTelegram(tv, chatId) {
 
   try {
     if (tv.image && tv.image.url) {
+      // Download image as buffer first
+      const response = await axios.get(tv.image.url, {
+        responseType: "arraybuffer",
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+          "Referer": "https://offerup.com/",
+        },
+      });
+
+      const imageBuffer = Buffer.from(response.data);
+
       await safeSend(() =>
-        bot.sendPhoto(chatId, tv.image.url, {
+        bot.sendPhoto(chatId, imageBuffer, {
           caption: text,
           parse_mode: "Markdown",
         })
@@ -84,6 +93,12 @@ async function sendTVToTelegram(tv, chatId) {
     }
   } catch (err) {
     console.error("Send error:", err.message);
+    // Fallback — send text only if image fails
+    await safeSend(() =>
+      bot.sendMessage(chatId, text, {
+        parse_mode: "Markdown",
+      })
+    );
   }
 }
 
@@ -103,7 +118,6 @@ bot.onText(/\/start/, async (msg) => {
   for (const tv of tvs) {
     let seen = false;
 
-    // Check Redis safely
     try {
       seen = await redis.sismember("seenListings", tv.listingId);
     } catch (err) {
@@ -113,14 +127,12 @@ bot.onText(/\/start/, async (msg) => {
     if (!seen) {
       await sendTVToTelegram(tv, chatId);
 
-      // Save to Redis safely
       try {
         await redis.sadd("seenListings", tv.listingId);
       } catch (err) {
         console.error("Redis write error:", err.message);
       }
 
-      // Telegram safe delay
       await sleep(1200);
     }
   }
@@ -145,12 +157,11 @@ bot.onText(/\/reset/, async (msg) => {
 });
 
 // --------------------------------------------------------
-
-
+// CRON JOB — every 30 mins 8am-8pm LA time
 cron.schedule(
   "*/30 8-20 * * *",
   async () => {
-    console.log("⏰ Running hourly TV check (LA time)...");
+    console.log("⏰ Running 30min TV check (LA time)...");
 
     const tvs = await getTVs();
     if (!tvs || tvs.length === 0) {
@@ -180,7 +191,7 @@ cron.schedule(
       }
     }
 
-    console.log("✅ Hourly cycle finished.");
+    console.log("✅ 30min cycle finished.");
   },
   {
     scheduled: true,
